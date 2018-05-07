@@ -1,0 +1,35 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/batch-demo?reWriteBatchedInserts=true
+    username: postgres
+    password: postgres
+    driverClassName: org.postgresql.Driver
+
+  jpa:
+    show-sql: false
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+        temp.use_jdbc_metadata_defaults: false
+        order_inserts: true
+        order_updates: true
+        jdbc:
+          lob.non_contextual_creation: true
+          batch_size: 20
+          fetch_size: 20
+          batch_versioned_data: true
+    hibernate:
+      ddl-auto: create-drop
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+
+logging:
+  level:
+    jdbc:
+      sqlonly: info
+      resultsettable: info
+      sqltiming: fatal
+      audit: fatal
+      resultset: fatal
+      connection: fatal
